@@ -1,0 +1,24 @@
+{
+  "name": "TwitchChat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ReadChat.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@geckos.io/phaser-on-nodejs": "^1.2.4",
+    "faye": "^1.4.0",
+    "moment": "^2.29.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "phaser": "^3.55.2",
+    "prompt-sync": "^4.2.0",
+    "requirejs": "^2.3.6",
+    "socket.io": "^4.1.2",
+    "tmi.js": "^1.8.3"
+  }
+}

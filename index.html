@@ -1,0 +1,87 @@
+<html>
+<head>
+  <style>
+    .ChatDungeon {
+      position: absolute; 
+      left:0px; 
+      top: 875px;  
+      width: 1240px; 
+      height: 205px;
+    }
+
+    .DungeonTitle {
+      position: relative; 
+      color: white;
+    }
+  </style>
+
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io.connect('http://localhost:8000');
+    var message = "";
+    var id = "";
+
+    var Count = 0;
+
+    socket.on('for_client', function (Data) {
+      CreateText(Data.someData)
+    });
+
+    function CreateText(Message) {
+
+      if (Message.length < 80) {
+          var leftPosition = (Math.random() * (screen.availWidth - 1250));
+          var topPosition = (Math.random() * (screen.availHeight - 925)) + 900;
+
+          var length = Message.length * 15;
+          var height = 32;
+          
+          var BackgroundElement = document.createElement("div");
+          BackgroundElement.style.position = "absolute";
+          BackgroundElement.style.left = leftPosition;
+          BackgroundElement.style.top = topPosition;
+          BackgroundElement.innerText = Message;
+          BackgroundElement.style.textAlign = "center"
+          BackgroundElement.style.opacity = 0.8;
+          BackgroundElement.style.fontFamily = "Georgia, serif";
+          BackgroundElement.style.color = "White";
+          BackgroundElement.style.fontSize = 24;
+          BackgroundElement.style.width = length;
+          BackgroundElement.style.height = height;
+          BackgroundElement.style.backgroundColor = "Black";
+          BackgroundElement.style.borderRadius = "5px";
+          BackgroundElement.style.borderStyle = "solid";
+          BackgroundElement.style.borderWidth = 2;
+          BackgroundElement.style.borderColor = "Orange";
+          BackgroundElement.id = Count;
+
+          document.body.appendChild(BackgroundElement);
+
+          var pElement = document.createElement("P");
+
+          var fadeTarget = document.getElementById(Count);
+          var fadeFunction = setInterval(function () {
+            if (fadeTarget.style.opacity > 0 ){
+              fadeTarget.style.opacity -= 0.01; 
+            }
+            else 
+            {
+              fadeTarget.parentNode.removeChild(fadeTarget);
+              clearInterval(fadeFunction);
+            }
+        }, 50);
+
+          console.log("Writing: " + Count + " At Top: " + topPosition + " And left: " + leftPosition)
+
+          Count += 1;
+        }
+      }
+
+  </script>
+</head>
+<body style="background-color: green;">
+<div class="ChatDungeon">
+</div>
+</body>
+</html>
